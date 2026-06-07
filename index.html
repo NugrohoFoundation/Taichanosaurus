@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sate Taichanosaurus</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" href="style.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #fff8ef;
+      color: #2b1d12;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: auto;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 248, 239, 0.92);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+      z-index: 1000;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #d35400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #d35400;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding-top: 90px;
+      background: linear-gradient(135deg, #fff8ef 0%, #ffe5c7 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 5rem);
+      line-height: 1.05;
+      margin-bottom: 18px;
+      color: #2b1d12;
+    }
+
+    .hero h1 span {
+      color: #d35400;
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: #5a4636;
+      margin-bottom: 28px;
+      max-width: 540px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #d35400;
+      color: white;
+      box-shadow: 0 10px 20px rgba(211, 84, 0, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #b34700;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 2px solid #d35400;
+      color: #d35400;
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: #d35400;
+      color: white;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      background: #ffd7b3;
+      border-radius: 50%;
+      top: -60px;
+      right: -60px;
+      z-index: 0;
+    }
+
+    .dish-image {
+      position: relative;
+      z-index: 1;
+      border-radius: 22px;
+      min-height: 420px;
+      background:
+        linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2)),
+        url('https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=1200&q=80') center/cover;
+      display: flex;
+      align-items: end;
+      padding: 22px;
+      color: white;
+    }
+
+    .floating-badge {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      background: rgba(255,255,255,0.92);
+      color: #d35400;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #6b5848;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .menu-card {
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .menu-card img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .menu-card-content {
+      padding: 20px;
+    }
+
+    .menu-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .price {
+      color: #d35400;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .about-box {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .info-item {
+      background: #fff3e4;
+      padding: 14px 16px;
+      border-radius: 14px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery img {
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .contact-box {
+      background: linear-gradient(135deg, #d35400, #ff7a18);
+      color: white;
+      padding: 36px;
+      border-radius: 28px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-box a {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      text-align: center;
+      color: #6b5848;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .about,
+      .menu-grid,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 70px;
+        right: 4%;
+        left: 4%;
+        background: white;
+        flex-direction: column;
+        padding: 18px;
+        border-radius: 18px;
+        box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        display: none;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .dish-image {
+        min-height: 360px;
+      }
+
+      .gallery img {
+        height: 260px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <div class="logo">Sate Taichanosaurus</div>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">Tentang</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Kontak</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+      <div>
+        <h1>Rasa sate yang <span>pedas, gurih, dan nagih</span>.</h1>
+        <p>
+          Selamat datang di Sate Taichanosaurus, tempat menikmati sate taichan dengan 5 menu favorit original, mentai, mozzarella, bertelur, dan kombinosaurus.
+        </p>
+        <div class="hero-buttons">
+          <a href="#menu" class="btn btn-primary">Lihat Menu</a>
+          <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="floating-badge">Buka setiap malam</div>
+        <div class="img/118701731_366451961047013_8617725012585724104_n.jpg">
+          <img src="img/118701731_366451961047013_8617725012585724104_n.jpg" alt="">
+          <div>
+            <h3>Taichanosaurus</h3>
+            <p>Pedasnya Nampol, Rasanya Nikmat!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="menu">
+    <div class="container">
+      <div class="section-title">
+        <h2>Menu Favorit</h2>
+        <p>.</p>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <img src="img/b0a1ade5-d885-4132-a21d-d1423cc7e7c8.png" alt="Mentainosaurus">
+          <div class="menu-card-content">
+            <h3>Taichan Original</h3>
+            <p>Nikmati kelezatan Sate Taichan Original yang dibuat dari potongan daging ayam pilihan, dibakar hingga matang sempurna dengan aroma smokey yang menggugah selera.</p>
+            <div class="price">Rp 25.000</div>
+              <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+          </div>
+        </div>
+
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <img src="img/8bb6f568-fd34-4f13-9d0d-26d57e00e83d.png" alt="Mentainosaurus">
+          <div class="menu-card-content">
+            <h3>Mentainosaurus</h3>
+            <p>Sate taichan dengan saus mentai creamy dan gurih.</p>
+            <div class="price">Rp 30.000</div>
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <img src="img/a09352cd-a3dd-489d-9dad-f0f99c6da7a3.png" alt="Mozzarellasaurus">
+          <div class="menu-card-content">
+            <h3>Mozasaurus</h3>
+            <p>Varian sate taichan dengan lelehan mozzarella yang lumer.</p>
+            <div class="price">Rp 35.000</div>
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <img src="img/d76d46aa-6529-4bc5-88ff-100a636151a1.png" alt="Taichan Bertelur">
+          <div class="menu-card-content">
+            <h3>Taichan Bertelur</h3>
+            <p>Menu favorit dengan topping telur yang bikin makin nikmat.</p>
+            <div class="price">Rp 35.000</div>
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+          </div>
+        </div>
+
+        <div class="menu-card">
+          <img src="img/cead8aa0-7938-48b8-87fc-2e730592665f.png" alt="Kombinosaurus">
+          <div class="menu-card-content">
+            <h3>Kombinosaurus</h3>
+            <p>Perpaduan sate taichan daging dengan kulit crispy dan gurih.</p>
+            <div class="price">Rp 35.000</div>
+            <a href="https://wa.me/6281234567890?text=Halo%20saya%20mau%20order%20Sate%20Taichanosaurus" class="btn btn-secondary" target="_blank">Pesan Sekarang</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container about">
+      <div class="about-box">
+        <h2>Tentang Kami</h2>
+        <p>
+          Sate Taichanosaurus dikenal dengan menu taichan yang bervariasi, harga ramah, dan cocok untuk makan malam maupun pesan acara.
+        </p>
+      </div>
+
+      <div class="about-box">
+        <h2>Info Toko</h2>
+        <div class="info-list">
+          <div class="info-item">📍 Lokasi: Taman Puring, Jakarta Selatan</div>
+          <div class="info-item">🕖 Jam buka: 19.00 - selesai</div>
+          <div class="info-item">📞 Kontak: +62 812-3456-7890</div>
+         
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="gallery">
+    <div class="container">
+      <div class="section-title">
+        <h2>Gallery</h2>
+        <p></p>
+      </div>
+
+      <div class="gallery">
+        <img src="img/fc75fcbf-f1b6-4011-9a8f-c8110bc9d8f1.png" alt="Gallery 1">
+        <img src="img/b34cce60-1554-4b7e-8986-e9d3962300b0.png" alt="Gallery 2">
+        <img src="img/c734efa2-35d8-4b07-8838-dcf78a8dee11.png" alt="Gallery 3">
+        <img src="img/b4708ada-8366-4ea7-9a22-1df92d2f8449.png" alt="Gallery 4">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2>Pesan Sekarang</h2>
+        <p>Hubungi kami untuk order harian, acara, atau kebutuhan katering.</p>
+        <p>WhatsApp: <a href="https://wa.me/6281234567890">+62 812-3456-7890</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/taichanosaurus/" target="_blank">@taichanosaurus</a></p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Sate Taichanosaurus. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
